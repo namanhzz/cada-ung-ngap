@@ -1,0 +1,61 @@
+{
+  "bbox": { "west": 102.0, "south": 20.0, "east": 108.1, "north": 23.5 },
+  "canonicalGrid": {
+    "zoom": 12,
+    "tileX0": 3208,
+    "tileX1": 3277,
+    "tileY0": 1772,
+    "tileY1": 1815,
+    "tileSize": 256,
+    "width": 17920,
+    "height": 11264
+  },
+  "webTiles": { "minZoom": 7, "maxZoom": 12 },
+  "rain": {
+    "baseUrl": "https://persiann.eng.uci.edu/CHRSdata/PDIRNow/PDIRNow1hourly",
+    "fetchStartUtc": "2024-09-02T00:00:00Z",
+    "fetchEndUtc": "2024-09-15T23:00:00Z",
+    "animStartUtc": "2024-09-05T00:00:00Z",
+    "globalGrid": { "cols": 9000, "rows": 3000, "cellDeg": 0.04, "row0CenterLat": 59.98, "col0CenterLon": 0.02 },
+    "crop": { "rowStart": 912, "rowEnd": 999, "colStart": 2550, "colEnd": 2702 },
+    "littleEndian": true,
+    "scaleDivisor": 100,
+    "concurrency": 4,
+    "retries": 3
+  },
+  "dem": {
+    "manualTifPath": "data/raw/dem/vn_dem30m.tif",
+    "terrariumUrl": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+    "concurrency": 8
+  },
+  "terrain": {
+    "stripRows": 256,
+    "haloRows": 64,
+    "minFilterRadiusPx": 57,
+    "model": {
+      "elevMax": 300,
+      "slopeMaxDeg": 15,
+      "handMax": 15,
+      "wElev": 0.25,
+      "wSlope": 0.3,
+      "wHand": 0.45
+    },
+    "hillshade": { "azimuthDeg": 315, "altitudeDeg": 45 }
+  },
+  "risk": {
+    "rainNorm24h": 200,
+    "rainNorm72h": 400,
+    "w24h": 0.6,
+    "w72h": 0.4,
+    "classBreaks": [0.1, 0.25, 0.45, 0.65],
+    "downsampleFactor": 10
+  },
+  "boundaries": {
+    "gisVnUrl": "https://gis.vn/kinh-tuyen-truc-ban-do-hanh-chinh-cap-tinh-thanh-viet-nam",
+    "fallbackUrls": [
+      "https://raw.githubusercontent.com/nguyenduy1133/Free-GIS-Data/main/Boundary/GeoJSON/34%20T%E1%BB%89nh%20Th%C3%A0nh/provinces.geojson",
+      "https://raw.githubusercontent.com/zuydd/vn-geo/master/data/provinces.geojson"
+    ],
+    "simplifyPercent": 8
+  }
+}

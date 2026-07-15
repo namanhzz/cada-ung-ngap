@@ -1,0 +1,39 @@
+{
+  "width": 1792,
+  "height": 1127,
+  "susScale": 250,
+  "maskValue": 255,
+  "bounds": {
+    "west": 101.953125,
+    "east": 108.10546875,
+    "north": 23.563987128451224,
+    "south": 19.97334878611061
+  },
+  "mercator": {
+    "zoom": 12,
+    "px0": 821248,
+    "py0": 453632,
+    "pxPerCell": 10
+  },
+  "model": {
+    "elevMax": 300,
+    "slopeMaxDeg": 15,
+    "handMax": 15,
+    "wElev": 0.25,
+    "wSlope": 0.3,
+    "wHand": 0.45
+  },
+  "risk": {
+    "rainNorm24h": 200,
+    "rainNorm72h": 400,
+    "w24h": 0.6,
+    "w72h": 0.4,
+    "classBreaks": [
+      0.1,
+      0.25,
+      0.45,
+      0.65
+    ],
+    "downsampleFactor": 10
+  }
+}
