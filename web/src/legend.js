@@ -17,7 +17,7 @@ export function buildLegend() {
   const rainBox = document.getElementById('legend-rain');
   const ramp = document.createElement('div');
   ramp.className = 'legend-ramp';
-  const stops = [0, 10, 50, 100, 200, 400];
+  const stops = [0, 25, 75, 150, 300];
   ramp.style.background = `linear-gradient(to right, ${stops
     .map((mm, i) => {
       const [r, g, b, a] = rainColor(mm);
@@ -26,6 +26,6 @@ export function buildLegend() {
     .join(', ')})`;
   const labels = document.createElement('div');
   labels.className = 'legend-ramp-labels';
-  labels.innerHTML = '<span>0</span><span>50</span><span>200</span><span>400+</span>';
+  labels.innerHTML = '<span>0</span><span>75</span><span>150</span><span>300+</span>';
   rainBox.append(ramp, labels);
 }

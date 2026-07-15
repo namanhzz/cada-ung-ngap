@@ -31,7 +31,9 @@ console.log('  ' + filtered.map((f) => f.properties.TinhThanh ?? f.properties.na
 
 // ---- Simplify bằng mapshaper ----
 const input = JSON.stringify({ type: 'FeatureCollection', features: filtered });
-const cmd = `-i in.geojson -simplify ${boundaries.simplifyPercent}% keep-shapes -o precision=0.0001 out.geojson`;
+// Clip theo bbox nghiên cứu — phần tỉnh thò ra ngoài vùng có dữ liệu bị cắt bỏ
+const clip = `${bbox.west},${bbox.south},${bbox.east},${bbox.north}`;
+const cmd = `-i in.geojson -simplify ${boundaries.simplifyPercent}% keep-shapes -clip bbox=${clip} -o precision=0.0001 out.geojson`;
 const result = await mapshaper.applyCommands(cmd, { 'in.geojson': input });
 const simplified = JSON.parse(result['out.geojson'].toString('utf8'));
 

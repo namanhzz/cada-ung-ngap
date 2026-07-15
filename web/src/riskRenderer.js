@@ -2,11 +2,13 @@
 // Canvas ở lưới lowres (~355m, đều trong mercator) — bilinear-sample mưa 4km.
 
 export const RISK_COLORS = [
-  [254, 204, 92],  // Thấp
-  [253, 141, 60],  // Trung bình
-  [240, 59, 32],   // Cao
-  [189, 0, 38]     // Rất cao
+  [255, 200, 50],  // Thấp — vàng đậm
+  [255, 120, 30],  // Trung bình — cam rực
+  [230, 20, 25],   // Cao — đỏ tươi
+  [130, 0, 30]     // Rất cao — đỏ thẫm
 ];
+// Alpha tăng dần theo mức nguy cơ — lớp cao nổi bật hẳn
+export const RISK_ALPHAS = [165, 205, 235, 250];
 export const RISK_LABELS = ['Thấp', 'Trung bình', 'Cao', 'Rất cao'];
 
 export function createRiskRenderer(data) {
@@ -43,7 +45,6 @@ export function createRiskRenderer(data) {
   const r24 = new Float32Array(data.cells);
   const r72 = new Float32Array(data.cells);
   const [b0, b1, b2, b3] = classBreaks;
-  const ALPHA = 190;
 
   /** Vẽ frame tại bước dữ liệu t (chỉ số tuyệt đối trong rain series). */
   function render(t) {
@@ -74,7 +75,7 @@ export function createRiskRenderer(data) {
         else if (risk >= b0) ci = 0;
         if (ci < 0) { px[o + 3] = 0; continue; }
         const col = RISK_COLORS[ci];
-        px[o] = col[0]; px[o + 1] = col[1]; px[o + 2] = col[2]; px[o + 3] = ALPHA;
+        px[o] = col[0]; px[o + 1] = col[1]; px[o + 2] = col[2]; px[o + 3] = RISK_ALPHAS[ci];
       }
     }
     ctx.putImageData(img, 0, 0);

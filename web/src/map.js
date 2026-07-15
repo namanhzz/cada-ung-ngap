@@ -22,7 +22,11 @@ export function createMap({ bbox, riskR, rainR, provinces, regionMask }) {
           attribution: '© CARTO © OpenStreetMap | Mưa: PDIR-Now (CHRS/UCI) | DEM: NASA SRTMGL1'
         }
       },
-      layers: [{ id: 'basemap', type: 'raster', source: 'basemap' }]
+      layers: [
+        // Nền cùng màu mask → kéo sát mép không lộ "hình chữ nhật"
+        { id: 'bg', type: 'background', paint: { 'background-color': '#e9ecef' } },
+        { id: 'basemap', type: 'raster', source: 'basemap' }
+      ]
     },
     bounds: [[bbox.west, bbox.south], [bbox.east, bbox.north]],
     fitBoundsOptions: { padding: 20 },
@@ -67,7 +71,7 @@ export function createMap({ bbox, riskR, rainR, provinces, regionMask }) {
       type: 'canvas', canvas: rainR.canvas, animate: true,
       coordinates: [[rb.west, rb.north], [rb.east, rb.north], [rb.east, rb.south], [rb.west, rb.south]]
     });
-    map.addLayer({ id: 'lyr-rain', type: 'raster', source: 'rain', paint: { 'raster-opacity': 0.6, 'raster-fade-duration': 0 } });
+    map.addLayer({ id: 'lyr-rain', type: 'raster', source: 'rain', paint: { 'raster-opacity': 0.75, 'raster-fade-duration': 0 } });
 
     // --- Nguy cơ ngập (canvas động) ---
     const kb = riskR.bounds;
@@ -75,13 +79,18 @@ export function createMap({ bbox, riskR, rainR, provinces, regionMask }) {
       type: 'canvas', canvas: riskR.canvas, animate: true,
       coordinates: [[kb.west, kb.north], [kb.east, kb.north], [kb.east, kb.south], [kb.west, kb.south]]
     });
-    map.addLayer({ id: 'lyr-risk', type: 'raster', source: 'risk', paint: { 'raster-opacity': 0.78, 'raster-fade-duration': 0 } });
+    map.addLayer({ id: 'lyr-risk', type: 'raster', source: 'risk', paint: { 'raster-opacity': 0.9, 'raster-fade-duration': 0 } });
 
-    // --- Mask: che mờ mọi thứ ngoài các tỉnh miền Bắc ---
+    // --- Mask: che ĐẶC mọi thứ ngoài các tỉnh miền Bắc (giấu mép raster) ---
     map.addSource('region-mask', { type: 'geojson', data: regionMask });
     map.addLayer({
       id: 'lyr-mask', type: 'fill', source: 'region-mask',
-      paint: { 'fill-color': '#f4f2ee', 'fill-opacity': 0.82 }
+      paint: { 'fill-color': '#e9ecef', 'fill-opacity': 1 }
+    });
+    // Viền glow mềm quanh vùng nghiên cứu
+    map.addLayer({
+      id: 'lyr-mask-glow', type: 'line', source: 'region-mask',
+      paint: { 'line-color': '#7d8ba1', 'line-width': 3, 'line-blur': 4, 'line-opacity': 0.6 }
     });
 
     // --- Ranh giới tỉnh ---
