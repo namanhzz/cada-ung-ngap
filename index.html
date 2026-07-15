@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bản đồ nguy cơ ngập sơ bộ — Miền Bắc Việt Nam</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>" />
+  <script type="module" crossorigin src="/cada-ung-ngap/assets/index-CDj6nlI4.js"></script>
+  <link rel="stylesheet" crossorigin href="/cada-ung-ngap/assets/index-CWzWjBCo.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <span id="brand">CADA<em>Lab</em></span>
+      <h1>Bản đồ nguy cơ ngập sơ bộ — Miền Bắc</h1>
+      <span id="event-badge">Sự kiện: Bão Yagi, 9/2024</span>
+    </header>
+    <div id="map"></div>
+    <aside id="panel">
+      <section class="panel-box" id="layers-box">
+        <h2>Lớp bản đồ</h2>
+        <label><input type="checkbox" id="lyr-risk" checked /> Nguy cơ ngập theo thời gian</label>
+        <label><input type="checkbox" id="lyr-rain" checked /> Lượng mưa (PDIR-Now, 4km)</label>
+        <label><input type="checkbox" id="lyr-sus" /> Độ nhạy cảm địa hình (30m)</label>
+        <label><input type="checkbox" id="lyr-hs" checked /> Bóng đổ địa hình</label>
+        <label><input type="checkbox" id="lyr-prov" checked /> Ranh giới tỉnh (sau sáp nhập)</label>
+      </section>
+      <section class="panel-box" id="legend-box">
+        <h2>Chú giải</h2>
+        <div id="legend-risk">
+          <h3>Nguy cơ ngập</h3>
+        </div>
+        <div id="legend-rain">
+          <h3>Mưa 24h gần nhất (mm)</h3>
+        </div>
+      </section>
+      <section class="panel-box" id="chart-box">
+        <h2>Mưa trung bình vùng (mm/h)</h2>
+        <canvas id="rain-chart" width="300" height="90"></canvas>
+      </section>
+    </aside>
+    <footer id="timebar">
+      <button id="btn-play" title="Phát / tạm dừng">▶</button>
+      <button id="btn-speed" title="Tốc độ">×1</button>
+      <input type="range" id="time-slider" min="0" max="263" value="0" step="1" />
+      <span id="time-label">—</span>
+    </footer>
+    <div id="disclaimer">
+      © CADA Lab — Bản đồ minh hoạ sơ bộ (chỉ số heuristic từ DEM SRTM 30m + mưa vệ tinh PDIR-Now) —
+      <b>không dùng cho cảnh báo thực tế</b>. Dữ liệu: CHRS/UCI, NASA/USGS, ranh giới 34 tỉnh sau sáp nhập.
+    </div>
+  </div>
+</body>
+</html>
